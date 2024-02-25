@@ -1,0 +1,3 @@
+pnpm run fix:lint
+pnpm run fix:format
+

@@ -6,19 +6,37 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "check:lint": "eslint .",
+    "fix:lint": "eslint . --fix",
+    "check:format": "prettier . --check",
+    "fix:format": "prettier . --write",
+    "check:types": "tsc --noEmit",
+    "prepare": "husky"
   },
   "dependencies": {
+    "next": "14.1.0",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.1.0"
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@alex-grover/eslint-config": "^0.0.6",
+    "@alex-grover/prettier-config": "0.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.1.0"
-  }
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.1.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-css-modules": "^2.12.0",
+    "eslint-plugin-import": "^2.29.1",
+    "husky": "^9.0.11",
+    "prettier": "3.2.5",
+    "typescript": "^5"
+  },
+  "eslintConfig": {
+    "extends": "@alex-grover"
+  },
+  "prettier": "@alex-grover/prettier-config"
 }
