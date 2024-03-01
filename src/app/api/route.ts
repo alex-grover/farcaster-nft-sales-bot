@@ -86,5 +86,5 @@ export async function POST(request: Request) {
     env.NEYNAR_SIGNER_UUID,
   )
 
-  return new Response('Success')
+  return new Response('Success', { status: 201 })
 }
