@@ -37,10 +37,14 @@ export async function POST(request: Request) {
     from_address: rawFromAddress,
     to_address: rawToAddress,
     transaction,
-    sale_details: { unit_price: price, unit_price_usd_cents: priceUsd },
-  } = json
+    sale_details: saleDetails,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  } = json.data
 
   if (eventType !== 'sale') return new Response('Not a sale')
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { unit_price: price, unit_price_usd_cents: priceUsd } = saleDetails
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const address = getAddress(rawAddress)

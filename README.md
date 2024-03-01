@@ -22,4 +22,3 @@ pnpm dev
 Set up a SimpleHash webhook as indicated here: https://docs.simplehash.com/reference/create-webhook
 
 It should be easy to spin this up for a different NFT collection in the future - you'll just need to have a Farcaster account for the bot, create a Neynar signer, and set up the SimpleHash webhook with a different contract address.
-
