@@ -1,15 +1,20 @@
 import { NeynarAPIClient } from '@neynar/nodejs-sdk'
+import { Address } from 'viem'
+import { env } from '@/lib/env'
 
-export function publishCast(
-  text: string,
-  url: string,
-  image: string,
-  apiKey: string,
-  signerUuid: string,
-) {
-  const client = new NeynarAPIClient(apiKey)
+const client = new NeynarAPIClient(env.NEYNAR_API_KEY)
 
-  return client.publishCast(signerUuid, text, {
+export async function getFarcasterUsername(address: Address) {
+  try {
+    const response = await client.lookupUserByVerification(address)
+    return response.result.user.username
+  } catch {
+    return null
+  }
+}
+
+export function publishCast(text: string, url: string, image: string) {
+  return client.publishCast(env.NEYNAR_SIGNER_UUID, text, {
     embeds: [{ url }, { url: image }],
   })
 }

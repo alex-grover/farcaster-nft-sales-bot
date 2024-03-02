@@ -4,9 +4,7 @@ Posts [Outcasts](https://highlight.xyz/mint/65c36ebc54235eefb1ccb906) sales on [
 
 ## Architecture
 
-Sales are pushed to this API via [SimpleHash webhooks](https://docs.simplehash.com/reference/webhook-api-overview). NFT and ENS data are then fetched from SimpleHash, Farcaster usernames for the buyer and seller are fetched from [Wield](https://docs.far.quest/reference/get_farcaster-v2-user-by-connected-address), and then the cast is published via Neynar.
-
-I'd like to consolidate the Wield and Neynar dependencies in the future.
+Sales are pushed to this API via [SimpleHash webhooks](https://docs.simplehash.com/reference/webhook-api-overview). NFT and ENS data are then fetched from SimpleHash, and Farcaster usernames and cast publishing are handled with [Neynar](https://neynar.com).
 
 ## Getting started
 
