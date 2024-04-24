@@ -1,6 +1,8 @@
-# outcasts-bot
+# farcaster-nft-sales-bot
 
-Posts [Outcasts](https://highlight.xyz/mint/65c36ebc54235eefb1ccb906) sales on [Farcaster](https://www.farcaster.xyz).
+Posts NFT sales on [Farcaster](https://www.farcaster.xyz).
+
+Currently running for [Outcasts](https://highlight.xyz/mint/65c36ebc54235eefb1ccb906) and [Optimists](https://highlight.xyz/mint/66229236b5f02c9b8e9189ce).
 
 ## Architecture
 

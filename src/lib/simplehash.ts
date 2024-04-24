@@ -1,7 +1,22 @@
 import crypto from 'crypto'
 import { Address } from 'viem'
-import { base } from 'viem/chains'
 import { env } from '@/lib/env'
+
+type SimpleHashWebhookPayload = {
+  data: {
+    chain: string
+    event_type: 'mint' | 'sale' | 'transfer' | 'burn'
+    contract_address: string
+    token_id: string | null
+    from_address: string | null
+    to_address: string | null
+    transaction: string
+    sale_details: {
+      unit_price: number | null
+      unit_price_usd_cents: number | null
+    } | null
+  }
+}
 
 export async function verifyWebhook(request: Request) {
   const webhookId = request.headers.get('webhook-id')
@@ -21,12 +36,11 @@ export async function verifyWebhook(request: Request) {
       .map((signature) => signature.split(',').at(1))
       .includes(signature)
   )
-    return { valid: false, json: null }
+    return { valid: false, data: null } as const
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const json = JSON.parse(text)
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  return { valid: true, json }
+  const json = JSON.parse(text) as SimpleHashWebhookPayload
+
+  return { valid: true, data: json.data } as const
 }
 
 type NftResponse = {
@@ -34,9 +48,9 @@ type NftResponse = {
   image_url: string
 }
 
-export async function getNft(address: Address, tokenId: string) {
+export async function getNft(chain: string, address: Address, tokenId: string) {
   const response = await fetch(
-    `https://api.simplehash.com/api/v0/nfts/${base.name.toLowerCase()}/${address}/${tokenId}`,
+    `https://api.simplehash.com/api/v0/nfts/${chain}/${address}/${tokenId}`,
     {
       headers: {
         'X-API-KEY': env.SIMPLEHASH_API_KEY,
