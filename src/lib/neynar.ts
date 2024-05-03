@@ -13,11 +13,15 @@ export async function getFarcasterUsername(address: Address) {
   }
 }
 
-const SIGNER_UUIDS: Record<Address, string> = {
-  '0x37a0C3216a09ec87Bb91958ca06065659D80F8DD':
-    env.OPTIMISTS_NEYNAR_SIGNER_UUID,
-  '0x73682A7f47Cb707C52cb38192dBB9266D3220315': env.OUTCASTS_NEYNAR_SIGNER_UUID,
-}
+const OPTIMISTS_ADDRESS = '0x37a0C3216a09ec87Bb91958ca06065659D80F8DD'
+const OUTCASTS_ADDRESS = '0x73682A7f47Cb707C52cb38192dBB9266D3220315'
+
+const SIGNER_UUIDS = new Map<Address, string>([
+  [OPTIMISTS_ADDRESS, env.OPTIMISTS_NEYNAR_SIGNER_UUID],
+  [OUTCASTS_ADDRESS, env.OUTCASTS_NEYNAR_SIGNER_UUID],
+])
+
+const CHANNELS = new Map<Address, string>([[OPTIMISTS_ADDRESS, 'optimists']])
 
 export function publishCast(
   address: Address,
@@ -25,10 +29,13 @@ export function publishCast(
   url: string,
   image: string,
 ) {
-  const signerUuid = SIGNER_UUIDS[address]
+  const signerUuid = SIGNER_UUIDS.get(address)
   if (!signerUuid) throw new Error('Unknown NFT address')
+
+  const channelId = CHANNELS.get(address)
 
   return client.publishCast(signerUuid, text, {
     embeds: [{ url }, { url: image }],
+    channelId,
   })
 }

@@ -43,8 +43,6 @@ export async function POST(request: Request) {
   const fromName = fromFname ? `@${fromFname}` : fromEns ?? fromAddress
   const toName = toFname ? `@${toFname}` : toEns ?? toAddress
 
-  // TODO: optionally publish in channel
-
   await publishCast(
     address,
     `${fromName} sold ${nft.name} to ${toName} for ${formatEther(BigInt(price))} ETH (${new Intl.NumberFormat(
