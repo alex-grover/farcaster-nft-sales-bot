@@ -1,6 +1,7 @@
 import { formatEther, getAddress } from 'viem'
 import { getChain } from '@/lib/chain'
-import { getFarcasterUsername, publishCast } from '@/lib/neynar'
+import { getFarcasterUsername } from '@/lib/farcaster'
+import { publishCast } from '@/lib/neynar'
 import { getEnsNames, getNft, verifyWebhook } from '@/lib/simplehash'
 
 export async function POST(request: Request) {

@@ -4,15 +4,6 @@ import { env } from '@/lib/env'
 
 const client = new NeynarAPIClient(env.NEYNAR_API_KEY)
 
-export async function getFarcasterUsername(address: Address) {
-  try {
-    const response = await client.lookupUserByVerification(address)
-    return response.result.user.username
-  } catch {
-    return null
-  }
-}
-
 const OPTIMISTS_ADDRESS = '0x37a0C3216a09ec87Bb91958ca06065659D80F8DD'
 const OUTCASTS_ADDRESS = '0x73682A7f47Cb707C52cb38192dBB9266D3220315'
 
