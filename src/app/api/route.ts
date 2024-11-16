@@ -1,4 +1,5 @@
 import { formatEther, getAddress } from 'viem'
+import { shortenAddress } from '@/lib/address'
 import { getChain } from '@/lib/chain'
 import { getFarcasterUsername } from '@/lib/farcaster'
 import { publishCast } from '@/lib/neynar'
@@ -41,8 +42,10 @@ export async function POST(request: Request) {
     getEnsNames([fromAddress, toAddress]),
   ])
 
-  const fromName = fromFname ? `@${fromFname}` : fromEns ?? fromAddress
-  const toName = toFname ? `@${toFname}` : toEns ?? toAddress
+  const fromName = fromFname
+    ? `@${fromFname}`
+    : fromEns ?? shortenAddress(fromAddress)
+  const toName = toFname ? `@${toFname}` : toEns ?? shortenAddress(toAddress)
 
   await publishCast(
     address,
