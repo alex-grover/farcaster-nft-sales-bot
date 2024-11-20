@@ -1,6 +1,5 @@
 import { formatEther, getAddress } from 'viem'
 import { shortenAddress } from '@/lib/address'
-import { getChain } from '@/lib/chain'
 import { getFarcasterUsername } from '@/lib/farcaster'
 import { publishCast } from '@/lib/neynar'
 import { getEnsNames, getNft, verifyWebhook } from '@/lib/simplehash'
@@ -18,7 +17,6 @@ export async function POST(request: Request) {
     token_id: tokenId,
     from_address: rawFromAddress,
     to_address: rawToAddress,
-    transaction,
     sale_details: saleDetails,
   } = webhook.data
 
@@ -53,7 +51,7 @@ export async function POST(request: Request) {
       'en-US',
       { style: 'currency', currency: 'USD' },
     ).format(priceUsd / 100)})`,
-    `${getChain(chain).blockExplorers.default.url}/tx/${transaction}`,
+    `https://opensea.io/assets/base/${address}/${tokenId}`,
     nft.image,
   )
 
