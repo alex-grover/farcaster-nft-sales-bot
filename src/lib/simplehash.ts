@@ -18,10 +18,16 @@ type SimpleHashWebhookPayload = {
   }
 }
 
-export async function verifyWebhook(request: Request) {
+export async function verifyWebhook(
+  request: Request,
+): Promise<
+  { valid: false } | { valid: true; data: SimpleHashWebhookPayload['data'] }
+> {
   const webhookId = request.headers.get('webhook-id')
   const webhookTimestamp = request.headers.get('webhook-timestamp')
   const webhookSignature = request.headers.get('webhook-signature')
+
+  if (!webhookId || !webhookTimestamp) return { valid: false }
 
   const text = await request.text()
 
@@ -36,11 +42,11 @@ export async function verifyWebhook(request: Request) {
       .map((signature) => signature.split(',').at(1))
       .includes(signature)
   )
-    return { valid: false, data: null } as const
+    return { valid: false }
 
   const json = JSON.parse(text) as SimpleHashWebhookPayload
 
-  return { valid: true, data: json.data } as const
+  return { valid: true, data: json.data }
 }
 
 type NftResponse = {

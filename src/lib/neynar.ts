@@ -5,14 +5,17 @@ import { env } from '@/lib/env'
 const client = new NeynarAPIClient(env.NEYNAR_API_KEY)
 
 const OPTIMISTS_ADDRESS = '0x37a0C3216a09ec87Bb91958ca06065659D80F8DD'
-const OUTCASTS_ADDRESS = '0x73682A7f47Cb707C52cb38192dBB9266D3220315'
+const HIGHER_SELF_ADDRESS = '0xc49Bae5D82644f607eaC97bE42d5188a51cb0CAF'
 
 const SIGNER_UUIDS = new Map<Address, string>([
   [OPTIMISTS_ADDRESS, env.OPTIMISTS_NEYNAR_SIGNER_UUID],
-  [OUTCASTS_ADDRESS, env.OUTCASTS_NEYNAR_SIGNER_UUID],
+  [HIGHER_SELF_ADDRESS, env.OPTIMISTS_NEYNAR_SIGNER_UUID],
 ])
 
-const CHANNELS = new Map<Address, string>([[OPTIMISTS_ADDRESS, 'optimists']])
+const CHANNELS = new Map<Address, string>([
+  [OPTIMISTS_ADDRESS, 'optimists'],
+  [HIGHER_SELF_ADDRESS, 'optimists'],
+])
 
 export function publishCast(
   address: Address,

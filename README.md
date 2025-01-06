@@ -2,11 +2,11 @@
 
 Posts NFT sales on [Farcaster](https://www.farcaster.xyz).
 
-Currently running for [Outcasts](https://highlight.xyz/mint/65c36ebc54235eefb1ccb906) and [Optimists](https://highlight.xyz/mint/66229236b5f02c9b8e9189ce).
+Currently running for [Optimists](https://highlight.xyz/mint/66229236b5f02c9b8e9189ce) and [Higher Self](https://higherself.wtf).
 
 ## Architecture
 
-Sales are pushed to this API via [SimpleHash webhooks](https://docs.simplehash.com/reference/webhook-api-overview). NFT and ENS data are then fetched from SimpleHash, and Farcaster usernames and cast publishing are handled with [Neynar](https://neynar.com).
+Sales are pushed to this API via [SimpleHash webhooks](https://docs.simplehash.com/reference/webhook-api-overview). NFT and ENS data are then fetched from SimpleHash, Farcaster usernames are fetched from [ensdata.net](https://ensdata.net), and cast publishing is handled with [Neynar](https://neynar.com).
 
 ## Getting started
 
