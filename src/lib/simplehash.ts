@@ -51,7 +51,9 @@ export async function verifyWebhook(
 
 type NftResponse = {
   name: string
-  image_url: string
+  previews: {
+    image_large_url: string
+  }
 }
 
 export async function getNft(chain: string, address: Address, tokenId: string) {
@@ -68,7 +70,7 @@ export async function getNft(chain: string, address: Address, tokenId: string) {
 
   return {
     name: json.name,
-    image: json.image_url,
+    image: json.previews.image_large_url,
   }
 }
 
